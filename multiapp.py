@@ -30,7 +30,7 @@ class MultiApp:
         st.markdown(
     """<style>
         .css-19ih76x{text-align: left !important}
-        .css-17eq0hr {
+        .css-1l02zno {
     background-color: #00b8e1;
     background-attachment: fixed;
     flex-shrink: 0;
