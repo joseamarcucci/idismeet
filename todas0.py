@@ -61,6 +61,7 @@ def app():
     #usuarios=df[above_352].groupby("Fecha")['Minutos Usados'].sum()
     usuarios=df[above_352].groupby("Correo electrónico del organizador", as_index=False).agg({ 'Identificador del participante' : 'nunique'})
     usuarios.index = [""] * len(usuarios)
+    df['Correo electrónico del organizador'] = df['Correo electrónico del organizador'].str.split('@').str[0]
     usuarios=usuarios.sort_values(by=['Correo electrónico del organizador'])
     usuarios.columns = ['Docente','Cantidad de Participantes']
     buff.table(usuarios)
