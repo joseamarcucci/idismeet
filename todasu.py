@@ -93,7 +93,7 @@ def app():
 
     from matplotlib.backends.backend_pdf import PdfPages 
    
-    col.table(asistencia2)
+    
     export_as_pdf = col.button("Exportar PDF")
 
     if export_as_pdf:
