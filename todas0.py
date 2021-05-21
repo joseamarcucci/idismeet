@@ -82,17 +82,7 @@ def app():
     #st.table(df[['Fecha','Código de reunión','Identificador del participante','Tipo de cliente','Correo electrónico del organizador','Duración','Nombre del participante']])
     asistencia2.index = [""] * len(asistencia2)  
     col.table(asistencia2)
-    download=col.button('Bajar csv')
-    if download:
-      'Download Started!'
-      liste= ['A','B','C']
-      df_download= pd.DataFrame(liste)
-      df_download.columns=['Title']
-      df_download
-      csv = asistencia2.to_csv(index=False)
-      b64 = pybase64.b64encode(csv.encode()).decode()  # some strings
-      linko= f'<a href="data:file/csv;base64,{b64}" download="asistencia2.csv">Bajar csv</a>'
-      st.markdown(linko, unsafe_allow_html=True)
+
 
 
 
