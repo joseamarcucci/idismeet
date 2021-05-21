@@ -50,7 +50,7 @@ def app():
     df=df.sort_values(by=['Correo electrónico del organizador'])
    #df = pd.DataFrame(['Correo electrónico del organizador'], columns= ['Correo electrónico del organizador'])
     #BeforeSymbol = df['Correo electrónico del organizador'].str.split('@').str[0]
-
+    df['Correo electrónico del organizador'] = df['Correo electrónico del organizador'].str.split('@').str[0]
     countries = df['Correo electrónico del organizador'].unique()
 
     country = buff.selectbox('Elegir Docente', countries)
