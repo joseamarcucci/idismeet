@@ -85,6 +85,38 @@ def app():
     #st.table(df[['Fecha','Código de reunión','Identificador del participante','Tipo de cliente','Correo electrónico del organizador','Duración','Nombre del participante']])
     asistencia2.index = [""] * len(asistencia2)  
     col.table(asistencia2)
+    import matplotlib.pyplot as plt
+
+    from matplotlib.backends.backend_pdf import PdfPages 
+   
+    
+    export_as_pdf = col.button("Exportar PDF")
+
+    if export_as_pdf:
+      with PdfPages(maxValue+'.pdf') as pdf:
+        table = pd.DataFrame(asistencia2)
+        header = table.columns
+        table = np.asarray(table)
+        fig = plt.figure(figsize=(15, 25))
+        ax = plt.Axes(fig, [0., 0., 1., 1.])
+        ax.set_axis_off()
+        fig.add_axes(ax)
+
+
+        plt.title('Asistencia')
+        tab = plt.table(cellText=table, colWidths=[0.15, 0.35,0.35], colLabels=header, cellLoc='center', loc='center')
+        tab.auto_set_font_size(False)
+        tab.set_fontsize(10)
+        tab.scale(0.7, 2.5)
+        pdf.savefig(fig)
+
+        st.write(fig)
+        plt.close()
+
+
+
+
+
 
 
 
