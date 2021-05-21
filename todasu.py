@@ -9,7 +9,9 @@ def app():
     st.markdown('<style>div[data-baseweb="select"] > div {text-transform: capitalize;}body{background-color:#008357;}</style>', unsafe_allow_html=True)
     st.markdown(
     """<style>
-       
+       .css-19ih76x {
+    text-align: right !important;
+}
         .css-17eq0hr {
     background-color: #00b8e1;
     background-attachment: fixed;
