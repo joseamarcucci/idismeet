@@ -8,4 +8,4 @@ altair
 gspread
 plotly.express
 fpdf
-pycode64
+pybase64
