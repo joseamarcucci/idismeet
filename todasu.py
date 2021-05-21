@@ -97,7 +97,7 @@ def app():
     export_as_pdf = col.button("Exportar PDF")
 
     if export_as_pdf:
-      with PdfPages('/mydrive/MyDrive/IdisMeet/asistencia_'+maxValue+'.pdf') as pdf:
+      with PdfPages(maxValue+'.pdf') as pdf:
         table = pd.DataFrame(asistencia2)
         header = table.columns
         table = np.asarray(table)
