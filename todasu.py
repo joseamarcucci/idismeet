@@ -37,6 +37,24 @@ def app():
     -webkit-box-align: center;
     align-items: center;
     }
+     .css-qbe2hs {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-weight: 400;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    margin: 0px;
+    line-height: 1.6;
+    color: inherit;
+    width: auto;
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(38, 39, 48, 0.2);
+}
+     .css-qbe2hs a{ text-decoration: none;}
     </style>
     """, unsafe_allow_html=True) 
    
