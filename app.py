@@ -6,7 +6,7 @@ from multiapp import MultiApp
 
 #import multiapp2 
 
-import todas0,todasu,gral # import your app modules here
+import todas0,todasu,gral,planilla # import your app modules here
 
 
 st.set_page_config(
@@ -41,7 +41,7 @@ app.add_app("Por docente", todasu.app)
 #app.add_app("Usuarios BBC x mes", mesesxuym.app)
 #app.add_app("Usuarios Collaborate", usuariosbbc.app)
 app.add_app("Por Fecha", todas0.app)
-#app.add_app("Usuarios del campus por UA", usuarios.app)
+app.add_app("Por planilla", planilla.app)
 #app.add_app("Usuarios totales del campus", usuarios0.app)
 
 #app.add_app("16 al 21 de abril", data_stats.app)
