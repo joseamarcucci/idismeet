@@ -3,6 +3,10 @@ import pandas as pd
 import numpy as np
 import pybase64
 from fpdf import FPDF
+import pybase64, io
+from fpdf import FPDF
+import matplotlib.image as mpimg
+from math import ceil
 
 def app():
     #st.markdown('<img style="float: left;" src="https://virtual.usal.edu.ar/branding/themes/Usal_7Julio_2017/images/60usalpad.png" />', unsafe_allow_html=True)
