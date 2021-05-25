@@ -3,7 +3,11 @@ import pandas as pd
 import numpy as np
 import pybase64
 import io
-
+import pybase64, io
+from fpdf import FPDF
+from data.create_data import create_table
+import matplotlib.image as mpimg
+from math import ceil
 def app():
     #st.markdown('<img style="float: left;" src="https://virtual.usal.edu.ar/branding/themes/Usal_7Julio_2017/images/60usalpad.png" />', unsafe_allow_html=True)
     st.markdown('<style>div[data-baseweb="select"] > div {text-transform: capitalize;}body{background-color:#008357;}</style>', unsafe_allow_html=True)
@@ -33,6 +37,33 @@ def app():
     -webkit-box-align: center;
     align-items: center;
     }
+      .css-1v3fvcr {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: -100px;
+    overflow: auto;
+    -webkit-box-align: center;
+    align-items: center;
+    }
+     .css-qbe2hs {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-weight: 400;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    margin: 0px;
+    line-height: 1.6;
+    color: inherit;
+    width: auto;
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(38, 39, 48, 0.2);
+}
+     .css-qbe2hs a{ text-decoration: none;}
     </style>
     """, unsafe_allow_html=True) 
    
@@ -83,45 +114,61 @@ def app():
      #asistencia2.columns = ['Fecha','Nombre','Duración']
 
     #st.table(df[['Fecha','Código de reunión','Identificador del participante','Tipo de cliente','Correo electrónico del organizador','Duración','Nombre del participante']])
-    asistencia2.index = [""] * len(asistencia2)  
+      asistencia2.index = [""] * len(asistencia2) 
+    c1, c2, c3, c4 = st.beta_columns((2, 1, 1, 1)) 
     col.table(asistencia2)
+
     import matplotlib.pyplot as plt
 
     from matplotlib.backends.backend_pdf import PdfPages 
    
+    buffi, coli =st.beta_columns([3,4])
     
-    export_as_pdf = col.button("Exportar PDF")
 
-    if export_as_pdf:
-      with PdfPages(maxValue+'.pdf') as pdf:
-        table = pd.DataFrame(asistencia2)
-        header = table.columns
-        table = np.asarray(table)
-        fig = plt.figure(figsize=(15, 25))
-        ax = plt.Axes(fig, [0., 0., 1., 1.])
-        ax.set_axis_off()
-        fig.add_axes(ax)
+    csv = asistencia2.to_csv(index=False)
+    b64 = pybase64.b64encode(csv.encode("latin-1")).decode()  # some strings
+    linko= f'<a class="css-qbe2hs" href="data:file/csv;base64,{b64}" download="asistencia'+dia+'.csv">Bajar csv/Excel</a>'
 
+#export_as_pdf = st.button("Export Report")
 
-        plt.title('Asistencia')
-        tab = plt.table(cellText=table, colWidths=[0.15, 0.35,0.35], colLabels=header, cellLoc='center', loc='center')
-        tab.auto_set_font_size(False)
-        tab.set_fontsize(10)
-        tab.scale(0.7, 2.5)
-        pdf.savefig(fig)
+#if export_as_pdf:
+    pdf = FPDF()
+    pdf.add_page()
+    import matplotlib.image as mpimg
+    from tempfile import NamedTemporaryFile
+    with NamedTemporaryFile(delete=False, suffix=".png") as tmpfile:
+            table = pd.DataFrame(asistencia2)
+            header = table.columns
+            table = np.asarray(table)
+            plt.title('Asistencia')
+            fig = plt.figure()
+            ax = plt.Axes(fig, [0., 0., 1., 1.])
+            ax.set_axis_off()
+            
+            
+            fig.add_axes(ax)
+            tab = plt.table(cellText=table, colWidths=[0.45, 0.35,0.35], colLabels=header, cellLoc='center', loc='center')
+            tab.auto_set_font_size(False)
+            tab.set_fontsize(10)
+            tab.scale(1, 1)
+            val1 = ["{:X}".format(i) for i in range(10)] 
 
-        st.write(fig)
-        plt.close()
-
-
-
-
-
-
-
-
-
-
-
-
+           
+            fig, ax = plt.subplots() 
+            ax.set_axis_off() 
+            table = ax.table( 
+            cellText = table,  
+            colWidths=[0.45, 0.25,0.25], colLabels=header, cellLoc='center', loc ='upper left')         
+   
+            ax.set_title('Período:'+minValue+' al '+maxValue, fontsize="8") 
+          
+            #fig.savefig(fig)
+            #st.write(fig)
+            fig.savefig(tmpfile.name,dpi=150) 
+            pdf.image(tmpfile.name, 0, 5, 200, 200)
+#html = create_download_link(pdf.output(dest="S").encode("latin-1"), "asistencia_"+str(maxValue))
+    b64 = pybase64.b64encode(pdf.output(dest="S").encode("latin-1"))  # val looks like b'...'
+    linki=f'<a class="css-qbe2hs" href="data:application/octet-stream;base64,{b64.decode()}" download="asistencia_'+str(maxValue)+'.pdf">Bajar PDF</a>'
+    c3.markdown(linko, unsafe_allow_html=True)
+    c4.markdown(linki, unsafe_allow_html=True)
 
