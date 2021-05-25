@@ -5,7 +5,7 @@ import pybase64
 import io
 import pybase64, io
 from fpdf import FPDF
-from data.create_data import create_table
+
 import matplotlib.image as mpimg
 from math import ceil
 def app():
