@@ -114,7 +114,7 @@ def app():
      #asistencia2.columns = ['Fecha','Nombre','Duración']
 
     #st.table(df[['Fecha','Código de reunión','Identificador del participante','Tipo de cliente','Correo electrónico del organizador','Duración','Nombre del participante']])
-     asistencia2.index = [""] * len(asistencia2) 
+    asistencia2.index = [""] * len(asistencia2) 
     c1, c2, c3, c4 = st.beta_columns((2, 1, 1, 1)) 
     col.table(asistencia2)
 
