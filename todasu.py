@@ -55,6 +55,11 @@ def app():
     border: 1px solid rgba(38, 39, 48, 0.2);
 }
      .css-qbe2hs a{ text-decoration: none;}
+          .css-1ekf893 {
+    font-family: "IBM Plex Sans", sans-serif;
+    margin-bottom: -1rem;
+    margin-top: -320px;
+}
     </style>
     """, unsafe_allow_html=True) 
    
@@ -152,7 +157,7 @@ def app():
             ax.set_axis_off() 
             table = ax.table( 
             cellText = table,  
-            colWidths=[0.45, 0.35,0.35], colLabels=header, cellLoc='center', loc ='upper left')         
+            colWidths=[0.45, 0.25,0.25], colLabels=header, cellLoc='center', loc ='upper left')         
    
             ax.set_title('Período:'+minValue+' al '+maxValue, fontsize="8") 
           
